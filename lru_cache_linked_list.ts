@@ -92,7 +92,7 @@ export default class LRUCache {
       this._evictLastItem();
     }
 
-    const newItem = {
+    const newItem: Item = {
       key,
       val,
       next: null,
