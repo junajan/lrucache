@@ -1,8 +1,8 @@
 # LRUCache using hash table and linked list
 
-Before running this install [node.js](https://nodejs.org/en) (at least v20).
+Before running this you have to first install [node.js](https://nodejs.org/en) (at least v20).
 
-To run test, install dependencies (typescript runner and node types) and run tests:
+To run tests, install dependencies (typescript runner and node types) and run following commands:
 ```
 pnpm i
 pnpm test
