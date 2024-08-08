@@ -9,12 +9,12 @@
 // get(key): returns the value of the key if it already exists in the cache.
 // set(key, value): if the key is already present, update its value. If not present, add the key-value pair to the cache. If the cache reaches its capacity it should invalidate the least recently used item before inserting the new item.
 
-type Item = {
+export type Item = {
   val: any,
   key: any,
   next: Item | null,
   prev: Item | null,
-}
+};
 
 export default class LRUCache {
   maxSize: number;
@@ -24,7 +24,7 @@ export default class LRUCache {
 
   constructor(maxSize: number) {
     if (maxSize <= 0) {
-      throw new Error('Size cannot be zero or negative numver!');
+      throw new Error('Size cannot be zero or negative number!');
     }
 
     this.maxSize = maxSize;
@@ -74,11 +74,16 @@ export default class LRUCache {
 
   _evictLastItem() {
     this.keyMap.delete(this.lastItem.key);
-    this.lastItem = this.lastItem.prev
+
+    if (this.lastItem === this.firstItem) {
+      this.firstItem = null;
+    }
+
+    this.lastItem = this.lastItem.prev;
   }
 
   get(key: any) {
-    return this._retrieveItem(key)?.val
+    return this._retrieveItem(key)?.val;
   }
 
   set(key: any, val: any) {
@@ -101,5 +106,14 @@ export default class LRUCache {
 
     this.keyMap.set(key, newItem);
     this._insertAtFront(newItem);
+  }
+
+  // TODO this would be removed normally, it is used only for debugging purposes during implementation
+  debug() {
+    let item = this.firstItem;
+    while (item) {
+      console.log(item.key);
+      item = item.next;
+    }
   }
 }
